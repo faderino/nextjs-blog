@@ -6,14 +6,14 @@ import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../lib/posts";
 import { useEffect, useState } from "react";
 
-export default function Home({ allPostsData }) {
-  const [hello, setHello] = useState(null);
+export default function Home({ allPostsData, hello }) {
+  // const [hello, setHello] = useState(null);
 
-  useEffect(() => {
-    fetch("http://localhost:3000/api/hello")
-      .then((res) => res.json())
-      .then((res) => setHello(res));
-  }, []);
+  // useEffect(() => {
+  // fetch("http://localhost:3000/api/hello")
+  //   .then((res) => res.json())
+  //   .then((res) => setHello(res));
+  // }, []);
 
   return (
     <Layout home>
@@ -52,10 +52,18 @@ export default function Home({ allPostsData }) {
 }
 
 export async function getStaticProps() {
+  // Get all post data
   const allPostsData = getSortedPostsData();
+
+  // Get hello
+  const hello = await fetch("http://localhost:3000/api/hello").then((res) =>
+    res.json()
+  );
+
   return {
     props: {
       allPostsData,
+      hello,
     },
   };
 }
