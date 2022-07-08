@@ -3,7 +3,7 @@ import Layout from "../../components/layout";
 import { getAllPostIds, getPostData } from "../../lib/posts";
 import Date from "../../components/date";
 import utilStyles from "../../styles/utils.module.css";
-import { GetStaticProps, GetStaticPath } from "next/types";
+import { GetStaticProps, GetStaticPaths } from "next/types";
 
 export default function Post({
   postData,
@@ -30,7 +30,7 @@ export default function Post({
   );
 }
 
-export const getStaticPaths: GetStaticPath = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllPostIds();
   return {
     paths,
