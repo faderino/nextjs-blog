@@ -4,8 +4,17 @@ import Link from "next/link";
 import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../lib/posts";
+import { GetStaticProps } from "next";
 
-export default function Home({ allPostsData, hello }) {
+export default function Home({
+  allPostsData,
+}: {
+  allPostsData: {
+    date: string;
+    title: string;
+    id: string;
+  }[];
+}) {
   return (
     <Layout home>
       <Head>
@@ -13,8 +22,8 @@ export default function Home({ allPostsData, hello }) {
       </Head>
       <section className={utilStyles.headingMd}>
         <p>
-          Hello, I'm <b>Fadi</b>. I'm a software engineer and I love
-          front end!. You can find and contact me on{" "}
+          Hello, I'm <b>Fadi</b>. I'm a software engineer and I love front end!.
+          You can find and contact me on{" "}
           <a href="https://www.linkedin.com/in/fadi99/">LinkedIn</a>.
         </p>
         <p>
@@ -42,7 +51,7 @@ export default function Home({ allPostsData, hello }) {
   );
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   // Get all post data
   const allPostsData = getSortedPostsData();
 
@@ -51,4 +60,4 @@ export async function getStaticProps() {
       allPostsData,
     },
   };
-}
+};
