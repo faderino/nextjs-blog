@@ -4,17 +4,8 @@ import Link from "next/link";
 import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../lib/posts";
-import { useEffect, useState } from "react";
 
-export default function Home({ allPostsData }) {
-  const [hello, setHello] = useState(null);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/api/hello")
-      .then((res) => res.json())
-      .then((res) => setHello(res));
-  }, []);
-
+export default function Home({ allPostsData, hello }) {
   return (
     <Layout home>
       <Head>
@@ -22,7 +13,7 @@ export default function Home({ allPostsData }) {
       </Head>
       <section className={utilStyles.headingMd}>
         <p>
-          {hello?.text}, I'm <b>Fadi</b>. I'm a software engineer and I love
+          Hello, I'm <b>Fadi</b>. I'm a software engineer and I love
           front end!. You can find and contact me on{" "}
           <a href="https://www.linkedin.com/in/fadi99/">LinkedIn</a>.
         </p>
@@ -52,7 +43,9 @@ export default function Home({ allPostsData }) {
 }
 
 export async function getStaticProps() {
+  // Get all post data
   const allPostsData = getSortedPostsData();
+
   return {
     props: {
       allPostsData,
